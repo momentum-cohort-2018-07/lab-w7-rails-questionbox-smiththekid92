@@ -1,0 +1,22 @@
+<h1>Questions</h1>
+
+<h3><%= link_to "Have a question?", new_question_path %></h3>
+
+<div class="main_body">
+  <div class="question-view">
+  <table>
+    <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.title %></td>
+        <td><%= question.body %></td>
+        <td><%= question.user.username %></td>
+        <td><%= link_to  "Show", question %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>
