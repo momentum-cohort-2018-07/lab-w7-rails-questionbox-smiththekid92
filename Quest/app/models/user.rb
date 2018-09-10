@@ -3,5 +3,5 @@ class User < ApplicationRecord
   validates :username, :email, presence: true, uniqueness: true
   validates :password, presence: true, length:{minimum:8}
 
-  # has_many :questions
+  has_many :questions
 end

@@ -21,9 +21,11 @@ end
 user_ids = User.pluck(:id)
 
 500.times do
+  user = User.find(user_ids.sample)
   Question.create(
     title: Faker::ProgrammingLanguage.name,
     body: Faker::GreekPhilosophers.quote,
-    user: User.find(user_ids.sample)
+    user_id: user.id, 
+    username: user.username
   )
 end
