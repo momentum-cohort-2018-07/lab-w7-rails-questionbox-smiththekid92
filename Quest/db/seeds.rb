@@ -7,10 +7,23 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
+Question.delete_all 
+User.delete_all
+
 300.times do
   User.create(
     username: Faker::Internet.username,
     email: Faker::Internet.free_email, 
     password: Faker::Internet.password(8)
+  )
+end
+
+user_ids = User.pluck(:id)
+
+500.times do
+  Question.create(
+    title: Faker::ProgrammingLanguage.name,
+    body: Faker::GreekPhilosophers.quote,
+    user: User.find(user_ids.sample)
   )
 end
