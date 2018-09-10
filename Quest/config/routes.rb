@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'questions' => 'questions#show'
   # get 'questions/body:text'
   # get 'questions/username:string'
   # get 'questions/user_id:integer'
