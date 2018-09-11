@@ -9,7 +9,7 @@ require 'faker'
 
 Question.delete_all 
 User.delete_all
-# Comment.delete_all
+# Answer.delete_all
 
 300.times do
   User.create(
@@ -32,9 +32,12 @@ user_ids = User.pluck(:id)
 end
 
 
-# 1000.times do
-#   Comment.create(
-#     title: Faker::Hacker.verb,
-#     body: Faker::Hacker.say_something_smart
-#   )
-# end
+ 1000.times do
+  user = User.find(user_ids.sample)
+  Answer.create(
+    title: Faker::Hacker.verb,
+    body: Faker::Hacker.say_something_smart,
+    user_id: user.id,
+    username: user.username
+  )
+end#

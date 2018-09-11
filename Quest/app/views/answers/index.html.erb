@@ -1,0 +1,17 @@
+<div class="main_body">
+  <div class="answer-view">
+  <table>
+    <tbody>
+    <% @answers.each do |answer| %>
+      <tr>
+        <td><%= answer.body %></td>
+        <td>By: <%= answer.user.username %></td>
+        <td><%= link_to  "Back", question_path %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  </div>
+
+</div>

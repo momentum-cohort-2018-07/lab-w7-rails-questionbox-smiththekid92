@@ -4,12 +4,11 @@ Rails.application.routes.draw do
   get 'users/new'
   resources :users
   
-  resources :questions
-  root 'questions#index'
+  resources :questions do 
+    resources :answers
+  end
 
-  # resources :comments do
-  #   resources :comments
-  # end
+  root 'questions#index'
 
 
 end
