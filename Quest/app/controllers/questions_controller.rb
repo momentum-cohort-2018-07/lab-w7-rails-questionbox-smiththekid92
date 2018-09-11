@@ -1,10 +1,12 @@
 class QuestionsController < ApplicationController
+  before_action :set_question, only: [:show]
+
   def index
     @questions = Question.page(params[:page])
   end
 
   def show
-    @question = Question.find(params[:id])
+    @answers = @question.answers
   end
 
   def new
@@ -39,6 +41,10 @@ class QuestionsController < ApplicationController
 
 
   private
+
+  def set_question
+    @question = Question.find(params[:id])
+  end
 
   def question_params
     params.require(:question).permit(:title, :body, :username)
