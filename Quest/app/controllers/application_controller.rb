@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   helper_method :current_user
+  helper_method :logged_in?
 
     protected
       def current_user
@@ -10,7 +11,7 @@ class ApplicationController < ActionController::Base
         !!current_user
       end
   
-    # def authenticate
-    #   redirect_to login_path unless logged_in?
-    # end
+    def authenticate
+      redirect_to login_path unless logged_in?
+    end
 end

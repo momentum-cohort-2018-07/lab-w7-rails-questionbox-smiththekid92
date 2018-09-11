@@ -1,4 +1,9 @@
+<%= render 'header', post: @question %>
+
 <h1>Questions</h1>
+
+<%= paginate @questions %>
+<%= page_entries_info @questions %>
 
 <h3><%= link_to "Have a question?", new_question_path %></h3>
 
@@ -11,12 +16,10 @@
         <td><%= question.title %></td>
         <td><%= question.body %></td>
         <td>By: <%= question.user.username %></td>
-        <td><%= link_to  "Show", question %>
+
       </tr>
     <% end %>
     </tbody>
   </table>
-
-  </div>
 
 </div>

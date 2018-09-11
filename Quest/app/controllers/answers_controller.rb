@@ -1,48 +1,49 @@
 class AnswersController < ApplicationController
-  before_action :set_answer, only: [:show, :edit, :update, :destroy]
+  before_action :find_answerable
 
-  # GET /answers
-  # GET /answers.json
   def index
-    @answers = Answer.all
+    @answer = Answer.all
   end
 
   def show
-    @answer = Answer.find(params[:id])
+    
   end
 
   def new
-    redirect_to new_session_path, notice: 'You must be logged in to add an answer!' if !current_user
     @answer = Answer.new
   end
+
+  def create
+    if !current_user then 
+      redirect_to new_session_path, notice: 'You must be logged in to add a answer!'
+    else
+    @answer = @answerable.answers.new answer_params
+    @answer.save 
+    redirect_to @answer
+    end
+  end
+
+  def destroy
+  end
+
+
 
   def edit
   end
 
-  def create
-    @answer = Answer.new(answer_params)
-
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
-      else
-        format.html { render :new }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
+  private
+  def answer_params
+    params.require(:answer).permit(:text, :username, :question_id)
   end
 
-  def update
-    respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @answer }
-      else
-        format.html { render :edit }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
+  def find_answer_parent
+    @answerable = Answer.find_by_id(params[:id])
+  end
+  def find_answerable
+    
+    @answerable= Answer.find_by_id(params[:answer_id]) if params[:answer_id]
+    @answerable = question.find_by_id(params[:question_id]) if params[:question_id]
+  end
   end
 
   def destroy
@@ -60,6 +61,6 @@ class AnswersController < ApplicationController
     end
 
     def answer_params
-      params.:answer).permit(:title, :body, :username)
+      params.require(:answer).permit(:title, :body, :username)
     end
 end

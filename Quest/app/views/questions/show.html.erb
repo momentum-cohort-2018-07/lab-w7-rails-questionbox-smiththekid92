@@ -1,12 +1,17 @@
-<h1><%= link_to @question.title %></h1>
+<%= render 'header', post: @question %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Body:</strong><br>
-  <%= @question.body %>
-</p>
-
-<h3>Answers:</h3>
-
+<div>
+<% @questions.each do |question| %>
+<h1><%= question.title %></h1>
+<hr>
+<h5><%= question.user.username %></h5><br>
+<p><%= question.body %></p>
+<hr>
+ <% question.answers.each do |answer| %>
+   <%= answer.body %>
+ <% end %>
+<% end %>
+</div>
 
 <%= link_to 'Back', root_path %>
