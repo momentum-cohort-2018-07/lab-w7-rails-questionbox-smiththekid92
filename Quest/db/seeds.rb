@@ -31,13 +31,16 @@ user_ids = User.pluck(:id)
   )
 end
 
+question_ids = Question.pluck(:id)
 
- 1000.times do
+ 1000.times do 
   user = User.find(user_ids.sample)
+  question = Question.find(question_ids.sample)
   Answer.create(
     title: Faker::Hacker.verb,
     body: Faker::Hacker.say_something_smart,
     user_id: user.id,
-    username: user.username
+    username: user.username,
+    question_id: question.id
   )
-end#
+end

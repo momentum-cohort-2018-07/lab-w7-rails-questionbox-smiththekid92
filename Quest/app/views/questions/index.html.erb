@@ -1,6 +1,6 @@
 <%= render 'header', post: @question %>
 
-<h1>Questions</h1>
+<h1>Questions</h1><br>
 
 <%= paginate @questions %>
 <%= page_entries_info @questions %>
@@ -11,14 +11,16 @@
   <div class="question-view">
   <table>
     <tbody>
-    <% @questions.each do |question| %>
-      <tr>
-        <td><%= question.title %></td>
-        <td><%= question.body %></td>
-        <td>By: <%= question.user.username %></td>
-
-      </tr>
-    <% end %>
+      <div>
+        <% @questions.each do |question| %>
+        <h1><%= question.title %></h1>
+        <hr>
+        <h4>By:<%= question.user.username %></h4><br>
+        <p><%= question.body %></p>
+        <hr>
+        <%= link_to 'Show Answer(s)', question_path(question) %>
+        <% end %>
+      </div>
     </tbody>
   </table>
 
