@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-      @question = Question.find(params[:id])
+    @question = Question.find(params[:id])
   end
 
   def new
@@ -13,41 +13,35 @@ class QuestionsController < ApplicationController
   end
 
   def edit
-      @question = Question.find(params[:id])
+    @question = Question.find(params[:id])
   end
 
   def create
-      @question = Question.new(question_params)
+    @question = Question.new(question_params)
 
-      if @question.save
-          redirect_to @question
-      else
-          render 'new'
-      end
+    if @question.save
+        redirect_to @question
+    else
+        render 'new'
+    end
   end
 
   def update
-      @question = Question.find(params[:id])
+    @question = Question.find(params[:id])
 
-      if @question.update(question_params)
+    if @question.update(question_params)
 
-          redirect_to @question
-      else
-          render 'edit'
-      end
-  end
-
-  def destroy
-      @question = Question.find(params[:id])
-      @question.destroy
-
-      redirect_to questions_path
+        redirect_to @question
+    else
+        render 'edit'
+    end
   end
 
 
   private
+
   def question_params
-      params.require(:question).permit(:title, :body, :username)
+    params.require(:question).permit(:title, :body, :username)
   end
 
 end
