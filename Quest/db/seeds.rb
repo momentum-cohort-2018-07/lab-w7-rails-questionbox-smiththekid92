@@ -9,7 +9,7 @@ require 'faker'
 
 Question.delete_all 
 User.delete_all
-# Answer.delete_all
+Answer.delete_all
 
 300.times do
   User.create(
