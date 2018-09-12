@@ -9,8 +9,9 @@ class AnswersController < ApplicationController
   end
 
   def new
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.build
     redirect_to new_session_path, notice: 'You must be logged in to add a answer' if !current_user
-    @answer = Answer.new
   end
 
   def edit
@@ -18,10 +19,12 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = Answer.new(answer_params)
+    @question = Question.find(params[:question_id])
+    @answer = @question.answers.build(answer_params)
+    @answer.user = current_user
 
     if @answer.save
-        redirect_to @answer
+        redirect_to question_path(@question)	
     else
         render 'new'
     end
@@ -42,6 +45,6 @@ class AnswersController < ApplicationController
   private
 
   def answer_params
-    params.require(:answer).permit(:title, :body, :username)
+    params.require(:answer).permit(:title, :body)
   end
 end
